@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
+List<List<String>> ideas = [
+  ['1', 'Искусственный интеллект в сфере госуслуг', 'Мы используем ИИ для того, чтобы улучшить качество оказываемых услуг.'],
+  ['1', 'Машинное обучение в сфере госуслуг', 'Мы используем МО для того, чтобы улучшить качество оказываемых услуг.']
+];
+
+List<Color> colors = [Colors.deepOrange[400], Colors.red[300], Colors.pink[300], Colors.green[300]];
 
 void main() => runApp(MyApp());
 
@@ -12,9 +20,9 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
           textTheme: TextTheme(
               title: TextStyle(
-                  color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                  color: Colors.white, fontWeight: FontWeight.bold),
               body2: TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.normal)),
+                  color: Colors.white, fontWeight: FontWeight.normal)),
         ),
         home: MyHomePage(title: 'Добро пожаловать на ярмарку!')
     );
@@ -38,13 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
         body: CustomScrollView(
           slivers: <Widget>[
             const SliverAppBar(
-              title: Text('Добро пожаловать!', style: TextStyle(color: Colors.white, fontSize: 24)),
-              elevation: 10,
-              backgroundColor: Colors.blueAccent,
+              title: Text('Добро пожаловать!', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 24)),
+              elevation: 30,
+              backgroundColor: Colors.white,
               pinned: false,
               expandedHeight: 250.0,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text('Проекты:', style: TextStyle(color: Colors.white, fontSize: 20)),
+                title: Text('Проекты:', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 20)),
               ),
             ),
             SliverFixedExtentList(
@@ -54,14 +62,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Center(
                       child: Card(
                           elevation: 10,
-                          color: Colors.white,
+                          color: colors[Random().nextInt(colors.length)],
                           child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
-                                const ListTile(
-                                  leading: Icon(Icons.album),
-                                  title: Text('Искуственный интеллект в госуслугах', ),
-                                  subtitle: Text('Описание проекта'),
+                                ListTile(
+                                  leading: Icon(Icons.account_circle),
+                                  title: Text(ideas[total][1], style: Theme.of(context).textTheme.title,),
+                                  subtitle: Text(ideas[total][2], style: Theme.of(context).textTheme.body2,),
                                 ),
                                 ButtonBar(
                                     children: <Widget>[
@@ -79,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                       ));
                 },
+                childCount: ideas.length
               ),
             ),
           ],
