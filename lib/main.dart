@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 List<List<String>> ideas = [
   ['1', 'Искусственный интеллект в сфере госуслуг', 'Мы используем ИИ для того, чтобы улучшить качество оказываемых услуг.'],
-  ['1', 'Машинное обучение в сфере госуслуг', 'Мы используем МО для того, чтобы улучшить качество оказываемых услуг.']
+  ['2', 'Машинное обучение в сфере госуслуг', 'Мы используем МО для того, чтобы улучшить качество оказываемых услуг.'],
+  ['3', 'Инновационный подход к тестированию выпускников школ.', 'Идея в том, чтобы найти и использовать новые методы тестирования, как замена ЕГЭ.']
 ];
 
 List<Color> colors = [Colors.deepOrange[400], Colors.red[300], Colors.pink[300], Colors.green[300]];
@@ -19,19 +22,19 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
           textTheme: TextTheme(
-              title: TextStyle(
+              headline6: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
-              body2: TextStyle(
+              bodyText1: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.normal)),
         ),
-        home: MyHomePage(title: 'Добро пожаловать на ярмарку!')
+        home: MyHomePage(headline6: 'Добро пожаловать на ярмарку!')
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key key, this.headline6}) : super(key: key);
+  final String headline6;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -46,39 +49,43 @@ class _MyHomePageState extends State<MyHomePage> {
         body: CustomScrollView(
           slivers: <Widget>[
             const SliverAppBar(
-              title: Text('Добро пожаловать!', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 24)),
+              centerTitle: true,
+              title: Text('Привет!', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 28, fontWeight: FontWeight.bold)),
               elevation: 30,
               backgroundColor: Colors.white,
               pinned: false,
-              expandedHeight: 250.0,
+              expandedHeight: 100.0,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text('Проекты:', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 20)),
+                title: Text('Чекай новые роекты:', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 18)),
               ),
             ),
             SliverFixedExtentList(
-              itemExtent: 250.0,
+              itemExtent: 200.0,
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int total) {
                   return Center(
                       child: Card(
-                          elevation: 10,
+                          elevation: 30,
                           color: colors[Random().nextInt(colors.length)],
                           child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 ListTile(
-                                  leading: Icon(Icons.account_circle),
-                                  title: Text(ideas[total][1], style: Theme.of(context).textTheme.title,),
-                                  subtitle: Text(ideas[total][2], style: Theme.of(context).textTheme.body2,),
+                                  leading: Icon(Icons.account_circle,size: 50,),
+                                  title: Text(ideas[total][1], style: Theme.of(context).textTheme.headline6,),
+                                  subtitle: Text(ideas[total][2], style: Theme.of(context).textTheme.bodyText1,),
                                 ),
                                 ButtonBar(
+                                    alignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      FlatButton(
-                                        child: Text('Хочу помочь!', style: Theme.of(context).textTheme.title),
+                                      OutlineButton(
+                                        borderSide: BorderSide(color: Colors.white,width: 3),
+                                        child: Text('Хочу помочь!', style: Theme.of(context).textTheme.headline6),
                                         onPressed: () {/* ... */},
                                       ),
                                       FlatButton(
-                                        child: Text('Надеюсь, у вас получится!', style: Theme.of(context).textTheme.title),
+                                        child: Text('Удачи!', style: Theme.of(context).textTheme.headline6),
                                         onPressed: () {/* ... */},
                                       )
                                     ]
