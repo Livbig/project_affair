@@ -1,7 +1,8 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+//import 'dart:math';
 
 List<List<String>> ideas = [
   ['1', 'Искусственный интеллект в сфере госуслуг', 'Мы используем ИИ для того, чтобы улучшить качество оказываемых услуг.'],
@@ -9,7 +10,7 @@ List<List<String>> ideas = [
   ['3', 'Инновационный подход к тестированию выпускников школ.', 'Идея в том, чтобы найти и использовать новые методы тестирования, как замена ЕГЭ.']
 ];
 
-List<Color> colors = [Colors.deepOrange[400], Colors.red[300], Colors.pink[300], Colors.green[300]];
+//List<Color> colors = [Colors.deepOrange[400], Colors.red[300], Colors.pink[300], Colors.green[300]];
 
 void main() => runApp(MyApp());
 
@@ -22,10 +23,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
           textTheme: TextTheme(
-              headline6: TextStyle(
+              headline5: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
+              headline6: TextStyle(
+                  color: Colors.deepPurple[300], fontWeight: FontWeight.bold),
               bodyText1: TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.normal)),
+                  color: Colors.deepPurple[300], fontWeight: FontWeight.normal)),
         ),
         home: MyHomePage(headline6: 'Добро пожаловать на ярмарку!')
     );
@@ -48,31 +51,38 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
         body: CustomScrollView(
           slivers: <Widget>[
-            const SliverAppBar(
+            SliverAppBar(
+//              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
               centerTitle: true,
-              title: Text('Привет!', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 28, fontWeight: FontWeight.bold)),
+//              title: Text('Привет!', style: Theme.of(context).textTheme.headline5),
               elevation: 30,
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.deepPurple[300],
               pinned: false,
-              expandedHeight: 100.0,
+              expandedHeight: 150.0,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text('Чекай новые роекты:', style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 18)),
+                title: Text('Чекай новые проекты:', style: Theme.of(context).textTheme.headline5),
               ),
             ),
             SliverFixedExtentList(
-              itemExtent: 200.0,
+              itemExtent: 300.0,
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int total) {
-                  return Center(
+                  return Container(
+                      padding: EdgeInsets.only(top: 30),
                       child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                           elevation: 30,
-                          color: colors[Random().nextInt(colors.length)],
+                          color: Colors.white,
                           child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 ListTile(
-                                  leading: Icon(Icons.account_circle,size: 50,),
+                                  isThreeLine: true,
+                                  leading: GestureDetector(
+                                    onTap:() {print('icon tapped');},
+                                    child: Icon(Icons.account_circle,size: 75) //CircleAvatar()
+                                  ),
                                   title: Text(ideas[total][1], style: Theme.of(context).textTheme.headline6,),
                                   subtitle: Text(ideas[total][2], style: Theme.of(context).textTheme.bodyText1,),
                                 ),
@@ -80,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     alignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       OutlineButton(
-                                        borderSide: BorderSide(color: Colors.white,width: 3),
+                                        borderSide: BorderSide(color: Colors.deepPurple[300],width: 3),
                                         child: Text('Хочу помочь!', style: Theme.of(context).textTheme.headline6),
                                         onPressed: () {/* ... */},
                                       ),
