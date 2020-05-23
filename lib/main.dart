@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
           textTheme: TextTheme(
+              button: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
               headline5: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
               headline6: TextStyle(
@@ -48,17 +49,22 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.deepPurple[300],
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
+//              bottom: TabBar(controller: TabController(),tabs: <Widget>[Chip(backgroundColor: Colors.white, label: Text('Tech'),)]),
+//              actions: <Widget>[
+//                IconButton(icon: Icon(Icons.computer,color: Colors.deepPurple[300]), onPressed: null, color: Colors.white,),
+//                IconButton(icon: Icon(Icons.camera), onPressed: null)
+//              ],
 //              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
               centerTitle: true,
 //              title: Text('Привет!', style: Theme.of(context).textTheme.headline5),
               elevation: 30,
               backgroundColor: Colors.deepPurple[300],
               pinned: false,
-              expandedHeight: 150.0,
+              expandedHeight: 300.0,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text('Чекай новые проекты:', style: Theme.of(context).textTheme.headline5),
               ),
@@ -81,7 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   isThreeLine: true,
                                   leading: GestureDetector(
                                     onTap:() {print('icon tapped');},
-                                    child: Icon(Icons.account_circle,size: 75) //CircleAvatar()
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.deepPurple[300],
+                                      child: Text('${ideas[total][0]}', style: Theme.of(context).textTheme.button),)
                                   ),
                                   title: Text(ideas[total][1], style: Theme.of(context).textTheme.headline6,),
                                   subtitle: Text(ideas[total][2], style: Theme.of(context).textTheme.bodyText1,),
@@ -89,9 +97,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ButtonBar(
                                     alignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      OutlineButton(
-                                        borderSide: BorderSide(color: Colors.deepPurple[300],width: 3),
-                                        child: Text('Хочу помочь!', style: Theme.of(context).textTheme.headline6),
+                                      FlatButton(
+                                        color: Colors.deepPurple[300],
+                                        child: Text('Хочу помочь!', style: Theme.of(context).textTheme.button),
                                         onPressed: () {/* ... */},
                                       ),
                                       FlatButton(
