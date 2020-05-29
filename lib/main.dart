@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 //import 'dart:math';
 
 List<List<String>> ideas = [
-  ['1', 'Искусственный интеллект в сфере госуслуг', 'Мы используем ИИ для того, чтобы улучшить качество оказываемых услуг.'],
+  ['1', 'ИИ в сфере госуслуг', 'Мы используем ИИ для того, чтобы улучшить качество оказываемых услуг.'],
   ['2', 'Машинное обучение в сфере госуслуг', 'Мы используем МО для того, чтобы улучшить качество оказываемых услуг.'],
   ['3', 'Инновационный подход к тестированию выпускников школ.', 'Идея в том, чтобы найти и использовать новые методы тестирования, как замена ЕГЭ.']
 ];
@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
               headline5: TextStyle(
                   color: Colors.white, fontWeight: FontWeight.bold),
               headline6: TextStyle(
-                  color: Colors.deepPurple[300], fontWeight: FontWeight.bold),
+                  color: Colors.deepPurple[300], fontWeight: FontWeight.bold, fontSize: 20),
               bodyText1: TextStyle(
-                  color: Colors.deepPurple[300], fontWeight: FontWeight.normal)),
+                  color: Colors.deepPurple[300], fontWeight: FontWeight.normal, fontSize: 16)),
         ),
         home: MyHomePage(headline6: 'Добро пожаловать на ярмарку!')
     );
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int total) {
                   return Container(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.all(20),
                       child: Card(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                           elevation: 30,
@@ -84,23 +84,26 @@ class _MyHomePageState extends State<MyHomePage> {
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 ListTile(
-                                  isThreeLine: true,
                                   leading: GestureDetector(
                                     onTap:() {print('icon tapped');},
-                                    child: CircleAvatar(
+                                    child: CircleAvatar(maxRadius: 25,
                                       backgroundColor: Colors.deepPurple[300],
                                       child: Text('${ideas[total][0]}', style: Theme.of(context).textTheme.button),)
                                   ),
-                                  title: Text(ideas[total][1], style: Theme.of(context).textTheme.headline6,),
-                                  subtitle: Text(ideas[total][2], style: Theme.of(context).textTheme.bodyText1,),
+//                                  No more than 50 words in title!
+                                  title: Text('${ideas[total][1]}', style: Theme.of(context).textTheme.headline6,),
+//                                  users have to write at least 60 words in subtitle!
+                                  subtitle: Text('${ideas[total][2].substring(0,60)}...', style: Theme.of(context).textTheme.bodyText1,),
                                 ),
                                 ButtonBar(
                                     alignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       FlatButton(
+                                        padding: EdgeInsets.all(10),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                                         color: Colors.deepPurple[300],
                                         child: Text('Хочу помочь!', style: Theme.of(context).textTheme.button),
-                                        onPressed: () {/* ... */},
+                                        onPressed: () {},
                                       ),
                                       FlatButton(
                                         child: Text('Удачи!', style: Theme.of(context).textTheme.headline6),
